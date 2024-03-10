@@ -6,7 +6,7 @@ Please see instruction for original alignment-handbook here: https://github.com/
 2. Finetune pretrained mamba on SFT training script according to alignment-handbook github. 
 3. Further finetune it on DPO training script according to alignment-handbook github. Specifically these twos: https://github.com/huggingface/alignment-handbook/tree/main/recipes/zephyr-7b-beta, https://github.com/huggingface/alignment-handbook/tree/main/recipes/zephyr-7b-gemma
 4. Evaluate on MTBench and AlpacaEval according to the instruction from alignment-handbook research paper: https://arxiv.org/pdf/2310.16944.pdf section 4.2
-***We are half stucked on (2) (3) because condor decided not to run my Slurm script (see Why did we fail section below)***. To access A100 GPUs, all finetunings were done HPC Condor so I was in charge for (1) and writing Slurm scripts in .submit_file for (2) and (3). Meanwhile everyone including me investigated across many Git issue posts of Mamba and Zephyr in order to nail down the exact parameters to be tweaked when adapting Mamba onto SFT, DPO finetuning scripts.
+***We are half stucked on (2) (3) because condor decided not to run my Slurm script (see [Why did we fail section](https://github.com/5thGenDev/mamba-alignment-handbook/blob/main/README.md#why-did-we-fail) below)***. To access A100 GPUs, all finetunings were done HPC Condor so I was in charge for (1) and writing Slurm scripts in .submit_file for (2) and (3). Meanwhile everyone including me investigated across many Git issue posts of Mamba and Zephyr in order to nail down the exact parameters to be tweaked when adapting Mamba onto SFT, DPO finetuning scripts.
 
 
 ### But why mamba?
@@ -18,7 +18,7 @@ Please see instruction for original alignment-handbook here: https://github.com/
 from https://github.com/state-spaces/mamba/issues/196 <br>
 
 ***If based Mamba is already more efficient than the best Transformer model with FlashAttention-2, then imagine the potential when people starting to optimised Mamba*** <br>
-<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/2fe1a2d5-cf2b-4d04-8fba-b0ac00d1e881" height="320" width="820"> <br>
+<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/2fe1a2d5-cf2b-4d04-8fba-b0ac00d1e881" height="320" width="850"> <br>
 from Mamba research paper. Note that memory overhead (not memory storage) is the great bottleneck when it comes to speed <br>
 
 
