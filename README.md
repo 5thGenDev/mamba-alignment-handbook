@@ -1,5 +1,5 @@
 Please see instruction for original alignment-handbook here: https://github.com/huggingface/alignment-handbook/tree/main
-***We aren't the first ppl trying to finetune mamba. Other had tried before: https://github.com/state-spaces/mamba/pull/83, https://github.com/havenhq/mamba-chat, https://github.com/geronimi73/mamba/blob/main/finetune.py, Incorporate all lessons learnt all existing githubs and extensively reading model cards, Huggingface script and research papers from Mamba and alignment-handbook, we genuinely believe that we have produced a better finetuned mamba LLM.
+
 
 ### Overall pipeline: 
 1. Install necessary packages and pull docker image to host pretrained state-spaces/mamba-2.8b-slimpj.
@@ -20,6 +20,10 @@ from https://github.com/state-spaces/mamba/issues/196 <br>
 ***If based Mamba is already more efficient than the best Transformer model with FlashAttention-2, then imagine the potential when people starting to optimised Mamba*** <br>
 <img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/2fe1a2d5-cf2b-4d04-8fba-b0ac00d1e881" height="320" width="850"> <br>
 from Mamba research paper. Note that memory overhead (not memory storage) is the great bottleneck when it comes to speed <br>
+
+
+### How does ours differ from other finetuned Mamba?
+***We aren't the first ppl trying to finetune mamba. Other had tried before: https://github.com/state-spaces/mamba/pull/83, https://github.com/havenhq/mamba-chat, https://github.com/geronimi73/mamba/blob/main/finetune.py, Incorporate all lessons learnt all existing githubs and extensively reading model cards, Huggingface script and research papers from Mamba and alignment-handbook, we genuinely believe that we have produced a better finetuned mamba LLM.
 
 
 ### Why did we fail
