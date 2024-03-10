@@ -25,6 +25,7 @@ import datasets
 import torch
 import transformers
 from transformers import set_seed
+from mamba_ssm.models.mixer_seq_simple import MambaLMHeadModel
 
 from alignment import (
     DataArguments,
@@ -138,6 +139,8 @@ def main():
     ########################
     # Initialize the Trainer
     ########################
+    if model_args.model_name_or_path == "state-spaces/mamba-2.8b-slimpj":
+    	model = MambaLMHeadModel.from_pretrained("state-spaces/mamba-2.8b-slimpj") 
     trainer = SFTTrainer(
         model=model_args.model_name_or_path,
         model_init_kwargs=model_kwargs,
