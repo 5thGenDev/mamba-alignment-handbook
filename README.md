@@ -2,11 +2,11 @@ Please see instruction for original alignment-handbook here: https://github.com/
 
 
 ### Reproducible pipeline: 
-***Expect a lot of bugs at the moment because we couldn't test it on our HPC condor. This script is meant to run on uni condor HPC so no jupyter notebook here.***
 1. Git clone based alignment-handbook and based mamba and follow their installation instructions to get all necessary dependencies
 2. Delete git clone of based alignment-handbook and based mamba
 3. Git clone my modified mamba and alignment-handbook: https://github.com/5thGenDev/mamba-finetune/tree/main and https://github.com/5thGenDev/mamba-alignment-handbook. Based mamba can't finetune on downstream task and based-alignment-handbook has different config than mamba config even though they both inherit from HuggingFace, so some modified code is needed.
 4. Read the instruction in https://github.com/5thGenDev/mamba-finetune/blob/main/README.md carefully because it tells you which .py to make manual adjustment yourself.
+***Expect a lot of bugs at the moment because we couldn't test it on our HPC condor. This script is meant to run on uni condor HPC so no jupyter notebook here.*** If you want to intuitive read our code, read these files that you can see main page: dpo_sft.submit_file, mamba-sft-lora.yaml, mamba.sh, mamba.submit_file, sft.sh
 
 ### Overall pipeline: 
 1. Install necessary packages and pull docker image to host pretrained state-spaces/mamba-2.8b-slimpj.
