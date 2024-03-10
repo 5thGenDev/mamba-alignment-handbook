@@ -10,5 +10,5 @@ To access A100 GPUs, all finetunings were done HPC Condor so I was in charge for
 ### Reproducible pipeline: Expect a lot of bug at the moment.
 1. Git clone based alignment-handbook and based mamba and follow their installation instructions to get all necessary dependencies
 2. Delete git clone of based alignment-handbook and based mamba
-3. Git clone my modified mamba and alignment-handbook: https://github.com/5thGenDev/mamba-finetune/tree/main and https://github.com/5thGenDev/mamba-alignment-handbook. Based mamba can't finetune on downstream task and based-alignment-handbook can't just take mamba straightforward so some modified code is needed.
+3. Git clone my modified mamba and alignment-handbook: https://github.com/5thGenDev/mamba-finetune/tree/main and https://github.com/5thGenDev/mamba-alignment-handbook. Based mamba can't finetune on downstream task and based-alignment-handbook has different config than mamba config even though they both inherit from HuggingFace, so some modified code is needed.
 4. Read the instruction in https://github.com/5thGenDev/mamba-finetune/blob/main/README.md carefully because it tells you which .py to make manual adjustment yourself.
