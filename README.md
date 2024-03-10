@@ -19,7 +19,7 @@ Please see instruction for original alignment-handbook here: https://github.com/
 <img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/08626f7c-2fa8-47bf-a051-23e8946f4fe7" height="320" width="700"> <br>
 
 2. In theory, we can have infinite sequence length. In practice, the longer the sequence length, the close you get to OOM,the more computation loads is required and memory overheads to be sent back and forth between HBM and SRAM. Contrary to popular believe, the true training/inference time bottleneck isn't computation but memory overheads (see [eli5 FlashAttention-1](https://gordicaleksa.medium.com/eli5-flash-attention-5c44017022ad)). Transformer has quadratic complexity between sequence length to computation and memory overheads. FlashAttention-2 can fix some of that, but based Mamba already gotten linear complexity: <br>
-<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/e87b77bb-b1b9-45c3-8f33-7adb5e926a4e" height="320" width="780"> <br>
+<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/e87b77bb-b1b9-45c3-8f33-7adb5e926a4e" height="380" width="820"> <br>
 from https://github.com/state-spaces/mamba/issues/196 <br>
 
 ***If based Mamba is already more efficient than the best Transformer model with FlashAttention-2, then imagine the potential when people have optimised Mamba like Transformer++ with FlashAttention-2*** <br>
