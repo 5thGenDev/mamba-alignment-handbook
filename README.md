@@ -14,7 +14,6 @@ Please see instruction for original alignment-handbook here: https://github.com/
 4. Evaluate on MTBench and AlpacaEval according to the instruction from alignment-handbook research paper: https://arxiv.org/pdf/2310.16944.pdf section 4.2
 ***We are half stucked on (2) (3) because condor decided not to run my Slurm script (see [Why did we fail section](https://github.com/5thGenDev/mamba-alignment-handbook/blob/main/README.md#why-did-we-fail) below)***. To access A100 GPUs, all finetunings were done HPC Condor so I was in charge for (1) and writing Slurm scripts in .submit_file for (2) and (3). Meanwhile everyone including me investigated across many Git issue posts of Mamba and Zephyr in order to nail down the exact parameters to be tweaked when adapting Mamba onto SFT, DPO finetuning scripts.
 
-
 ### But why mamba?
 1. ***If all human can read 1500 words in seconds and have even shorter memories than that movie "50 first dates", then LLM can be considered as humans because [all LLM is stateless and can't remember conversation](https://www.reddit.com/r/Oobabooga/comments/16qa4cj/comment/k1vy8rr/?context=3)***. What actually happens behind the scene is that some api like openAI api takes all your sentences and all GPT-4 responses since the beginning of conversation and merge into 1 big input and let GPT-4 read that 1 big input. Since sequence length is the maximum number of tokens that any LLM can handle where 1 token = 1 word, 1 symbols like colon, it also implies the maximum number of tokens that GPT-4 and all LLM can 'remember'. When we push above LLM maximum sequence length, it gets dumb really quickly as shown in the graph below (high perplexity means dumber LLM)
 <img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/08626f7c-2fa8-47bf-a051-23e8946f4fe7" height="320" width="700"> <br>
@@ -27,10 +26,8 @@ from https://github.com/state-spaces/mamba/issues/196 <br>
 <img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/2fe1a2d5-cf2b-4d04-8fba-b0ac00d1e881" height="320" width="850"> <br>
 from Mamba research paper. Note that memory overhead (not memory storage) is the great bottleneck when it comes to speed <br>
 
-
 ### How does ours differ from other finetuned Mamba?
 ***We aren't the first ppl trying to finetune mamba. Other had tried before: https://github.com/state-spaces/mamba/pull/83, https://github.com/havenhq/mamba-chat, https://github.com/geronimi73/mamba/blob/main/finetune.py, Incorporate all lessons learnt all existing githubs and extensively reading model cards, Huggingface script and research papers from Mamba and alignment-handbook, we genuinely believe that we have produced a better finetuned mamba LLM.
-
 
 ### Why did we fail
 TLDR: We have tried to expect these condor issues ahead (hence the project was designed to be direct and simple so we all could start on implementing straightaway since. But HPC condor frequently has server issues that are outside our controls where:
@@ -38,3 +35,9 @@ TLDR: We have tried to expect these condor issues ahead (hence the project was d
 - Multi-GPU jobs only gets extra priority when a machine (e.g. A100 compute node) has just come back up from draining, for the first few minutes they 'prefer' multi GPU jobs. This is by design because we found that machines were getting full of single GPU jobs and the multi jobs couldn't get slots. Now we run a 'defrag' system that picks a machine to drain every x hours so that multi gpu jobs can run. Likely happened to us too.
 - Some people have been potentially abusing the condor job scheduler to reserve compute resources for themselves by bypassing the limitations set on interactive jobs by submitting regular batch jobs with processes that idle but keep the job running so they can use the condor ssh to job feature to connect to their job and use it interactively. Maybe, but not likely.
 
+### Authors
+- Nam Tran: namhoangtran1590@gmail.com
+- Yousself El Aasar: joeace2002@gmail.com
+- Govind K: govindkonnanat2002@gmail.com
+- Devoprasad Sunil Nedungade: nedungade@gmail.com
+- Sushen YADAV: Sushenydv@gmail.com
