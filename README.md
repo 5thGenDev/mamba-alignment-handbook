@@ -23,7 +23,7 @@ Please see instruction for original alignment-handbook here: https://github.com/
 <img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/e87b77bb-b1b9-45c3-8f33-7adb5e926a4e" height="320" width="780"> <br>
 from https://github.com/state-spaces/mamba/issues/196 <br>
 
-***If based Mamba is already more efficient than the best Transformer model with FlashAttention-2, then imagine the potential when people starting to optimised Mamba*** <br>
+***If based Mamba is already more efficient than the best Transformer model with FlashAttention-2, then imagine the potential when people have optimised Mamba like Transformer++ with FlashAttention-2*** <br>
 <img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/2fe1a2d5-cf2b-4d04-8fba-b0ac00d1e881" height="320" width="850"> <br>
 from Mamba research paper. Note that memory overhead (not memory storage) is the great bottleneck when it comes to speed <br>
 
