@@ -20,7 +20,10 @@ import sys
 import torch
 import transformers
 from transformers import AutoModelForCausalLM, set_seed
+import sys
+sys.path.insert(0, 'path/to/your/mamba/mamba-ssm')
 from mamba_ssm.models.mixer_seq_simple import MambaLMHeadModel
+
 
 from alignment import (
     DataArguments,
