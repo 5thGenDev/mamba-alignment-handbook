@@ -154,7 +154,8 @@ def main():
             revision=model_args.model_revision,
         )
         model_kwargs = None
-
+    if model_args.model_name_or_path == "state-spaces/mamba-2.8b-slimpj":
+        model = MambaLMHeadModel.from_pretrained("state-spaces/mamba-2.8b-slimpj")
     ref_model = model
     ref_model_kwargs = model_kwargs
 
@@ -165,7 +166,6 @@ def main():
     #########################
     # Instantiate DPO trainer
     #########################
-    
     trainer = DPOTrainer(
         model,
         ref_model,
