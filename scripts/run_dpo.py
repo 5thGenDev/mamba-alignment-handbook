@@ -20,6 +20,7 @@ import sys
 import torch
 import transformers
 from transformers import AutoModelForCausalLM, set_seed
+from mamba_ssm.models.mixer_seq_simple import MambaLMHeadModel
 
 from alignment import (
     DataArguments,
@@ -164,6 +165,7 @@ def main():
     #########################
     # Instantiate DPO trainer
     #########################
+    
     trainer = DPOTrainer(
         model,
         ref_model,
