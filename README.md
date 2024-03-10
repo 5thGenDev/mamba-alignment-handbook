@@ -35,7 +35,7 @@ TLDR: We have tried to expect these condor issues ahead (hence the project was d
 
 But HPC condor frequently has server issues that are outside our controls where:
 - Slurm handles things by different queues but if you're not careful, it can leave resources sitting empty 'just in case'. This happened to us in this project.
-- Multi-GPU jobs only gets extra priority when a machine (e.g. A100 compute node) has just come back up from draining, for the first few minutes they 'prefer' multi GPU jobs. This is by design because we found that machines were getting full of single GPU jobs and the multi jobs couldn't get slots. Now we run a 'defrag' system that picks a machine to drain every x hours so that multi gpu jobs can run. Likely happened to us too.
+- Multi-GPU jobs only gets extra priority when a machine (e.g. A100 compute node) has just come back up from draining, for the first few minutes they 'prefer' multi GPU jobs. This is by design because many machines were getting full of single GPU jobs and the multi jobs couldn't get slots so a 'defrag' system that picks a machine to drain every x hours so that multi gpu jobs can run. Likely happened to us too.
 - Some people have been potentially abusing the condor job scheduler to reserve compute resources for themselves by bypassing the limitations set on interactive jobs by submitting regular batch jobs with processes that idle but keep the job running so they can use the condor ssh to job feature to connect to their job and use it interactively. Maybe, but not likely.
 
 
