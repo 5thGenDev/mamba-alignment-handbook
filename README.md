@@ -30,10 +30,14 @@ from Mamba research paper. Note that memory overhead (not memory storage) is the
 ***We aren't the first ppl trying to finetune mamba. Other had tried before: https://github.com/state-spaces/mamba/pull/83, https://github.com/havenhq/mamba-chat, https://github.com/geronimi73/mamba/blob/main/finetune.py, Incorporate all lessons learnt all existing githubs and extensively reading model cards, Huggingface script and research papers from Mamba and alignment-handbook, we genuinely believe that we have produced a better finetuned mamba LLM.
 
 ### Why did we fail
-TLDR: We have tried to expect these condor issues ahead (hence the project was designed to be direct and simple so we all could start on implementing straightaway since. But HPC condor frequently has server issues that are outside our controls where:
+TLDR: We have tried to expect these condor issues ahead (hence the project was designed to be direct and simple so we all could start on implementing straightaway)
+![image](https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/afd3a2ed-ea02-4e57-a896-1bcc8dc7adb9)
+
+But HPC condor frequently has server issues that are outside our controls where:
 - Slurm handles things by different queues but if you're not careful, it can leave resources sitting empty 'just in case'. This happened to us in this project.
 - Multi-GPU jobs only gets extra priority when a machine (e.g. A100 compute node) has just come back up from draining, for the first few minutes they 'prefer' multi GPU jobs. This is by design because we found that machines were getting full of single GPU jobs and the multi jobs couldn't get slots. Now we run a 'defrag' system that picks a machine to drain every x hours so that multi gpu jobs can run. Likely happened to us too.
 - Some people have been potentially abusing the condor job scheduler to reserve compute resources for themselves by bypassing the limitations set on interactive jobs by submitting regular batch jobs with processes that idle but keep the job running so they can use the condor ssh to job feature to connect to their job and use it interactively. Maybe, but not likely.
+
 
 ### Authors
 - Nam Tran: namhoangtran1590@gmail.com
