@@ -25,6 +25,13 @@ import datasets
 import torch
 import transformers
 from transformers import set_seed
+
+# refer to local mamba_ssm instead of based mamba_ssm.
+import sys
+#sys.path.insert(0, '/path/to/local/mamba-ssm') to import mamba-ssm from local directory
+sys.path.insert(0, '/mnt/fast/nobackup/users/nt00601/mamba-finetune/mamba_ssm')
+import mamba_ssm
+
 from mamba_ssm.models.mixer_seq_simple import MambaLMHeadModel
 
 from alignment import (
