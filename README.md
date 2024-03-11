@@ -27,7 +27,7 @@ Please see instruction for original alignment-handbook here: https://github.com/
 #### 20-40x faster in training time
 In theory, we can have infinite sequence length. In practice, longer sequence length means longer training time and bigger price tag. Also, to make a successful model, expect to pretrain or finetune at least several times before you get the parameters just right. 
 - Per pretraining, this is the typical price tag: <br>
-<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/1c477925-9db5-414f-b1d9-b8fa70dc9ceb" height="350" width="880"> <br>
+<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/1c477925-9db5-414f-b1d9-b8fa70dc9ceb" height="350" width="780"> <br>
 from https://www.databricks.com/blog/gpt-3-quality-for-500k where each model was trained on 256xA100-40GB cluster with 1600Gbps RoCE interconnect, using a global batch size of 2048 sequences ~= 4M tokens. <br>
 
 - Per finetuning, if you use 16x A100-80GB, it typically takes 2-4 hours as reported in Zephyr paper; thus for 8x A100, it will take 4-8 hours. With a price tag from [vast.ai](https://cloud.vast.ai/create/?_gl=1*1ohiye0*_ga*NjAwNzg5OTQuMTcwNjk5NDQzMg..*_ga_DG15WC8WXG*MTcxMDE1MDU0My42LjEuMTcxMDE1NDg5MS42MC4wLjA.*_gcl_au*NjQzNDQ2NzU5LjE3MDY5OTQ0MzI.) (cheaper than Google), you are looking at £46.33 -> £92.66. <br>
