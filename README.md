@@ -16,7 +16,7 @@ Please see instruction for original alignment-handbook here: https://github.com/
 
 ### But why mamba?
 ***TLDR: It is can handle bigger sequence length and is 20-40x faster in training time***. In the graph below produced by Mamba authors, they showcased that comparing purely by network architecture performance (so not taking in account of speedup from better training recipe, more quality dataset,... etc etc), based Mamba with little optimisation in its infant state can beat a Transformer architecture which had 7 years of R&D behind it and a further speed boost from FlashAttention-2.
-<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/2fe1a2d5-cf2b-4d04-8fba-b0ac00d1e881" height="350" width="850"> <br>
+<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/2fe1a2d5-cf2b-4d04-8fba-b0ac00d1e881" height="320" width="850"> <br>
 ***Now, let's tackle the impact of bigger sequence length and "reasonable" training time.***
    
 #### Bigger sequence length
