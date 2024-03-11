@@ -15,7 +15,7 @@ Please see instruction for original alignment-handbook here: https://github.com/
 ***We are half stucked on (2) (3) because condor decided not to run my Slurm script (see [Why did we fail section](https://github.com/5thGenDev/mamba-alignment-handbook/blob/main/README.md#why-did-we-fail) below)***. To access A100 GPUs, all finetunings were done HPC Condor so I was in charge for (1) and writing Slurm scripts in .submit_file for (2) and (3). Meanwhile everyone including me investigated across many Git issue posts of Mamba and Zephyr in order to nail down the exact parameters to be tweaked when adapting Mamba onto SFT, DPO finetuning scripts.
 
 ### But why mamba?
-***TLDR: It is can handle bigger sequence length and is 20-40x faster in training***. In the graph below produced by Mamba authors, they showcased that comparing purely by network architecture performance (so not taking in account of speedup from better training recipe, more quality dataset,... etc etc), based Mamba with little optimisation in its infant state can beat a Transformer architecture which had 7 years of R&D behind it and a further speed boost from FlashAttention-2.
+***TLDR: It is can handle bigger sequence length and is 20-40x faster in training time***. In the graph below produced by Mamba authors, they showcased that comparing purely by network architecture performance (so not taking in account of speedup from better training recipe, more quality dataset,... etc etc), based Mamba with little optimisation in its infant state can beat a Transformer architecture which had 7 years of R&D behind it and a further speed boost from FlashAttention-2.
 <img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/2fe1a2d5-cf2b-4d04-8fba-b0ac00d1e881" height="350" width="850"> <br>
 ***Now, let's tackle the impact of bigger sequence length and "reasonable" training time.***
    
@@ -24,12 +24,13 @@ Please see instruction for original alignment-handbook here: https://github.com/
 ["sequence length" = "context length" + "max prompt"](https://www.reddit.com/r/OpenAI/comments/1329q4a/comment/ji3ynr3/?utm_source=share&utm_medium=web2x&context=3), and sequence length per se is the maximum number of tokens that we can input to an LLM. Right now, both Microsoft and OpenAI is trying to rollout their next LLM with 32k sequence length so you know "sequence length". Anyhow, does bigger sequence length only means you can talk to LLM longer or sending a bigger prompt to GPT-4? Yes, but there's a bigger implication behind it. If you try to talk to any pretrained LLM on HuggingFace, you will realise that it will be dumb initially - here it is an [example](https://github.com/huggingface/alignment-handbook/issues/78). I don't know how to explain this phenomenon, I just know that all LLMs suffer from this phenomenon for the first 500 tokens (oughly 375 words: 500 * [3/4](https://platform.openai.com/tokenizer) = 375) then it gets smart until we get over its maximum "sequence length" as showcased in the graph below (high perplexity means dumber LLM)
 <img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/08626f7c-2fa8-47bf-a051-23e8946f4fe7" height="380" width="820"> <br>
 
-#### "Reasonable" training time
+#### 20-40x faster in training time
 In theory, we can have infinite sequence length. In practice, longer sequence length means longer training time and bigger price tag. Also, to make a successful model, expect to pretrain or finetune at least several times before you get the parameters just right. 
 - Per pretraining, this is the typical price tag: <br>
-<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/73e97cc0-17c2-46a0-a7b1-f834a2afe80" height="320" width="820"> <br>
-from https://www.databricks.com/blog/gpt-3-quality-for-500k <br>
-- Per finetuning, if you use 16x A100 it typically takes 2-4 hours. So for 8x A100, it will take 4-8 hours, and with a price tag from [vast.ai](https://cloud.vast.ai/create/?_gl=1*1ohiye0*_ga*NjAwNzg5OTQuMTcwNjk5NDQzMg..*_ga_DG15WC8WXG*MTcxMDE1MDU0My42LjEuMTcxMDE1NDg5MS42MC4wLjA.*_gcl_au*NjQzNDQ2NzU5LjE3MDY5OTQ0MzI.) (cheaper than Google), you are looking at £46.33 -> £92.66. <br>
+<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/1c477925-9db5-414f-b1d9-b8fa70dc9ceb" height="380" width="820"> <br>
+from https://www.databricks.com/blog/gpt-3-quality-for-500k where each model was trained on 256xA100-40GB cluster with 1600Gbps RoCE interconnect, using a global batch size of 2048 sequences ~= 4M tokens. <br>
+
+- Per finetuning, if you use 16x A100-80GB, it typically takes 2-4 hours as reported in Zephyr paper; thus for 8x A100, it will take 4-8 hours. With a price tag from [vast.ai](https://cloud.vast.ai/create/?_gl=1*1ohiye0*_ga*NjAwNzg5OTQuMTcwNjk5NDQzMg..*_ga_DG15WC8WXG*MTcxMDE1MDU0My42LjEuMTcxMDE1NDg5MS42MC4wLjA.*_gcl_au*NjQzNDQ2NzU5LjE3MDY5OTQ0MzI.) (cheaper than Google), you are looking at £46.33 -> £92.66. <br>
 
 ***Now let's imagine we have a working mamba. $2.5M (or £1.95M) is reduced to £48750. £92.66 is reduced downto £2.3.***
 
