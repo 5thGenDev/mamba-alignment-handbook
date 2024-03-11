@@ -47,7 +47,6 @@ But HPC condor frequently has server issues that are outside our controls where:
 - Some people have been potentially abusing the condor job scheduler to reserve compute resources for themselves by bypassing the limitations set on interactive jobs by submitting regular batch jobs with processes that idle but keep the job running so they can use the condor ssh to job feature to connect to their job and use it interactively. Maybe, but not likely.
 
 
-### Extra
 #### What does a token look like
 A token can be a word or symbol like , ; . / @
 <img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/5be21d1d-382d-486e-84c3-46a95c74865b" height="350" width="850"> <br>
