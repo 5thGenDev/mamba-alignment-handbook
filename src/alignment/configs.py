@@ -177,6 +177,14 @@ class ModelArguments:
         default=None,
         metadata={"help": ("Model layers to unfreeze & train")},
     )
+    task_type: Optional[str] = field(
+        default="CAUSAL_LM",
+        metadata={"help": ("https://huggingface.co/state-spaces/mamba-2.8b-hf used task_type=CAUSAL_LM for Peft-LoraConfig")},
+    )
+    bias: Optional[str] = field(
+        default="none",
+        metadata={"help": ("https://huggingface.co/state-spaces/mamba-2.8b-hf used bias=none for Peft-LoraConfig")},
+    )
     load_in_8bit: bool = field(default=False, metadata={"help": "use 8 bit precision"})
     load_in_4bit: bool = field(default=False, metadata={"help": "use 4 bit precision"})
 
