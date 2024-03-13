@@ -1,18 +1,19 @@
 Please see instruction for original alignment-handbook here: https://github.com/huggingface/alignment-handbook/tree/main
 
 ### Reproducible pipeline: 
-1. Git clone based alignment-handbook and based mamba and follow their installation instructions to get all necessary dependencies
-2. Delete git clone of based alignment-handbook and based mamba
-3. Git clone my modified mamba and alignment-handbook: https://github.com/5thGenDev/mamba-finetune/tree/main and https://github.com/5thGenDev/mamba-alignment-handbook. Based mamba can't finetune on downstream task and based-alignment-handbook has different config than mamba config even though they both inherit from HuggingFace, so some modified code is needed.
-4. Before running any bash script using .submit_file for condor, type "chmod 777 bash script file"
+1. Follow instructions of [alignment-handbook git](https://github.com/huggingface/alignment-handbook) and [Mamba git](https://github.com/state-spaces/mamba) to install all dependencies for both on handbook conda environment. To get compatible docker image for Mamba, take nvcr.io/nvidia/pytorch:23.12-py3
+2. <git clone https://github.com/5thGenDev/mamba-finetune/tree/main> and <git clone https://github.com/5thGenDev/mamba-alignment-handbook>
+3. Before running any bash script using .submit_file for condor, type "chmod 777 bash script file"
 If you want to intuitive read our code, read these files that you can see main page: dpo_sft.submit_file, mamba-sft-lora.yaml, mamba.sh, mamba.submit_file, sft.sh. Our yaml is filed based on - https://github.com/huggingface/alignment-handbook/pull/88 with some minor adjustment according to [Mamba model card](https://huggingface.co/state-spaces/mamba-2.8b-hf) and [Mamba paper section E2](https://arxiv.org/pdf/2312.00752.pdf)
    
 
 ### Overall pipeline: 
-1. Install necessary packages and pull docker image to host pretrained state-spaces/mamba-2.8b-slimpj.
-2. Finetune pretrained mamba on SFT and DPO training script according to alignment-handbook github. Specifically these twos: https://github.com/huggingface/alignment-handbook/tree/main/recipes/zephyr-7b-beta, https://github.com/huggingface/alignment-handbook/tree/main/recipes/zephyr-7b-gemma
-4. Evaluate on MTBench and AlpacaEval according to the instruction from alignment-handbook research paper: https://arxiv.org/pdf/2310.16944.pdf section 4.2
-***We are half stucked on (2) (3) because condor decided not to run my Slurm script (see [Why did we fail section](https://github.com/5thGenDev/mamba-alignment-handbook/blob/main/README.md#why-did-we-fail) below)***. To access A100 GPUs, all finetunings were done HPC Condor so I was in charge for (1) and writing Slurm scripts in .submit_file for (2) and (3). Meanwhile everyone including me investigated across many Git issue posts of Mamba and Zephyr in order to nail down the exact parameters to be tweaked when adapting Mamba onto SFT, DPO finetuning scripts.
+1. Status: Done - Install necessary packages and pull docker image to finetune pretrained state-spaces/mamba-2.8b-hf. 
+2. Status: Done - Tweak Mamba git so that class Mambaconfig is more friendly to Huggingface/Transformers API - but not sure if this matters because we're gonna pull transformer-compatible pretrained Mamba anyway.
+3. From [Zephyr-7b-beta script](https://github.com/huggingface/alignment-handbook/blob/main/recipes/zephyr-7b-beta/README.md), we tweak [SFT-qLORA](https://github.com/5thGenDev/mamba-alignment-handbook/blob/main/mamba-sft-qlora.yaml) and [DPO-qLORA](https://github.com/5thGenDev/mamba-alignment-handbook/blob/main/mamba-dpo-qlora.yaml) so that they fit Mamba. Specifically these twos: https://github.com/huggingface/alignment-handbook/tree/main/recipes/zephyr-7b-beta, https://github.com/huggingface/alignment-handbook/tree/main/recipes/zephyr-7b-gemma.
+4. Evaluate on MTBench and AlpacaEval according to [alignment-handbook paper at section 4.2](https://arxiv.org/pdf/2310.16944.pdf).
+5. Take finetuned Mamba and repeat (3) and (4) for different datasets that were used in [Zephyr 7B Gemma scripts](https://github.com/huggingface/alignment-handbook/blob/main/recipes/zephyr-7b-gemma/README.md). Since those are 10k and 7k datasets, even without qLORA, the training time won't be that bad.
+To access A100 GPUs, all finetunings were done HPC Condor so I was in charge for (1) and writing Slurm scripts in .submit_file for (2) and (3). Meanwhile everyone including me read across many Git issues on Mamba and DPO-SFT git to tweak parameters on yaml files to adapt SFT-qLORA, DPO-qLORA on Mamba.
 
 ### Why mamba?
 TLDR: There are rumours within LLM research community at large that Mamba can replace Transformer because ***[it has Linear Complexity when it comes to training time with respect to sequence length](https://github.com/state-spaces/mamba/issues/196), thus it can handle bigger sequence length and is 20-40x faster in training time***. In the graph below produced by Mamba authors, they showcased that comparing purely by network architecture performance (so not taking in account of speedup from better training recipe, more quality dataset,... etc etc), based Mamba with little optimisation in its infant state can beat a Transformer architecture which had 7 years of R&D behind it
