@@ -4,9 +4,8 @@ Please see instruction for original alignment-handbook here: https://github.com/
 1. Git clone based alignment-handbook and based mamba and follow their installation instructions to get all necessary dependencies
 2. Delete git clone of based alignment-handbook and based mamba
 3. Git clone my modified mamba and alignment-handbook: https://github.com/5thGenDev/mamba-finetune/tree/main and https://github.com/5thGenDev/mamba-alignment-handbook. Based mamba can't finetune on downstream task and based-alignment-handbook has different config than mamba config even though they both inherit from HuggingFace, so some modified code is needed.
-4. Read the instruction in https://github.com/5thGenDev/mamba-finetune/blob/main/README.md carefully because it tells you which .py to make manual adjustment yourself.
-***Expect a lot of bugs at the moment because we couldn't test it on our HPC condor. This script is meant to run on uni condor HPC so no jupyter notebook here, thus before running these bash script, type "chmod 777 mamba.sh or sft.sh" before you submit mamba.submit_file and then dpo_sft.submit_file*** If you want to intuitive read our code, read these files that you can see main page: dpo_sft.submit_file, mamba-sft-lora.yaml, mamba.sh, mamba.submit_file, sft.sh
-   4.1 On both mamba-sft-qlora.yaml and mamba-dpo-qlora.yaml that we're gonna produced later. You need to change per_device_train_batch_size such that the global batch size stays 64 for SFT and 32 for DPO - https://github.com/huggingface/alignment-handbook/pull/88.
+4. Before running any bash script using .submit_file for condor, type "chmod 777 bash script file"
+If you want to intuitive read our code, read these files that you can see main page: dpo_sft.submit_file, mamba-sft-lora.yaml, mamba.sh, mamba.submit_file, sft.sh. Our yaml is filed based on - https://github.com/huggingface/alignment-handbook/pull/88 with some minor adjustment according to [Mamba model card](https://huggingface.co/state-spaces/mamba-2.8b-hf) and [Mamba paper section E2](https://arxiv.org/pdf/2312.00752.pdf)
    
 
 ### Overall pipeline: 
