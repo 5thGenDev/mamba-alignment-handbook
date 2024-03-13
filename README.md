@@ -9,7 +9,7 @@ If you want to intuitive read our code, read these files that you can see main p
 
 ### Overall pipeline: 
 1. Status: Done - Install necessary packages and pull docker image to finetune pretrained state-spaces/mamba-2.8b-hf. 
-2. Status: Done - Tweak Mamba git so that class Mambaconfig is more friendly to Huggingface/Transformers API - but not sure if this matters because we're gonna pull transformer-compatible pretrained Mamba anyway.
+2. Status: Done - Tweak Mamba git so that class Mambaconfig is more friendly to Huggingface/Transformers api - but not sure if this matters because we're gonna pull transformer-compatible pretrained Mamba anyway.
 3. From [Zephyr-7b-beta script](https://github.com/huggingface/alignment-handbook/blob/main/recipes/zephyr-7b-beta/README.md), tweak [SFT-qLORA.yaml](https://github.com/5thGenDev/mamba-alignment-handbook/blob/main/mamba-sft-qlora.yaml); then tweak [DPO-qLORA.yaml](https://github.com/5thGenDev/mamba-alignment-handbook/blob/main/mamba-dpo-qlora.yaml) so that they fit Mamba.
 4. Right before evaluation, [load sft adapter first then merge the adapter into the base model and then load the dpo adapter](https://github.com/huggingface/alignment-handbook/issues/78).
 5. Evaluate on MTBench and AlpacaEval according to [alignment-handbook paper at section 4.2](https://arxiv.org/pdf/2310.16944.pdf).
