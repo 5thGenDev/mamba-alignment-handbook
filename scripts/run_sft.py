@@ -143,11 +143,13 @@ def main():
         quantization_config=quantization_config,
     )
 
+    # mamba-2.8-hf is already transformer-compatible but just in case we wanna run the mamba-2.8b-slimpj cus it was pretrained on 600B token instead of 300B token.
+    # if model_args.model_name_or_path == "https://huggingface.co/state-spaces/mamba-2.8b-hf":
+    #    model = MambaLMHeadModel.from_pretrained("https://huggingface.co/state-spaces/mamba-2.8b-hf")
+
     ########################
     # Initialize the Trainer
-    ########################
-    if model_args.model_name_or_path == "state-spaces/mamba-2.8b-hf":
-    	model = MambaLMHeadModel.from_pretrained("state-spaces/mamba-2.8b-hf") 
+    ######################## 
     trainer = SFTTrainer(
         model=model_args.model_name_or_path,
         model_init_kwargs=model_kwargs,
