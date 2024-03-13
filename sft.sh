@@ -11,4 +11,4 @@ conda activate handbook
 # Step 1 - SFT for mamba
 # mamba uses float16 to float32 to need to look into that
 # gradient_accumulation_steps=2 is default value but might need to change
-ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_configs/multi_gpu.yaml --num_processes=8 scripts/run_sft mamba-sft-lora.yaml
+ACCELERATE_LOG_LEVEL=info accelerate launch --config_file /mnt/fast/nobackup/users/nt00601/mamba-alignment-handbook/recipes/accelerate_configs/multi_gpu.yaml --num_processes=8 /mnt/fast/nobackup/users/nt00601/mamba-alignment-handbook/scripts/run_sft mamba-sft-lora.yaml
