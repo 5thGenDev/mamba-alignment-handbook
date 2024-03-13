@@ -25,6 +25,8 @@ dataset_splits:
 preprocessing_num_workers: 12
 
 # SFT trainer config
+# for per_device_train_batch_size you need to set it such that the total_batch_size for all used GPUs = 32. 
+# If u use 4, then per_device_train_batch_size = 32/4 = 8
 bf16: false
 do_eval: true
 evaluation_strategy: epoch
@@ -32,7 +34,7 @@ gradient_accumulation_steps: 1
 gradient_checkpointing: true
 gradient_checkpointing_kwargs:
   use_reentrant: false
-hub_model_id: mamba-7b-sft-lora
+hub_model_id: mamba-2.8b-sft-qlora
 hub_strategy: every_save
 learning_rate: 2.0e-03
 adam_beta1: 0.9
@@ -49,7 +51,7 @@ num_train_epochs: 3
 output_dir: data/mamba-7b-sft-lora
 overwrite_output_dir: true
 per_device_eval_batch_size: 8
-per_device_train_batch_size: 8
+per_device_train_batch_size: 32
 push_to_hub: true
 report_to:
 - tensorboard
