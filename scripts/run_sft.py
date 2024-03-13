@@ -146,8 +146,8 @@ def main():
     ########################
     # Initialize the Trainer
     ########################
-    if model_args.model_name_or_path == "state-spaces/mamba-2.8b-slimpj":
-    	model = MambaLMHeadModel.from_pretrained("state-spaces/mamba-2.8b-slimpj") 
+    if model_args.model_name_or_path == "state-spaces/mamba-2.8b-hf":
+    	model = MambaLMHeadModel.from_pretrained("state-spaces/mamba-2.8b-hf") 
     trainer = SFTTrainer(
         model=model_args.model_name_or_path,
         model_init_kwargs=model_kwargs,
