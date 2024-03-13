@@ -1,9 +1,11 @@
 Please see instruction for original alignment-handbook here: https://github.com/huggingface/alignment-handbook/tree/main
 
 ## Reproducible pipeline: 
-1. Follow instructions of [alignment-handbook git](https://github.com/huggingface/alignment-handbook) and [Mamba git](https://github.com/state-spaces/mamba) to install all dependencies for both on handbook conda environment. To get compatible docker image for Mamba, take nvcr.io/nvidia/pytorch:23.12-py3
-2. <git clone https://github.com/5thGenDev/mamba-finetune/tree/main> and <git clone https://github.com/5thGenDev/mamba-alignment-handbook>
-3. Before submitting .submit_file for condor to run  any bash script, type "chmod 777 bash script file" to make them executable
+1. Follow instructions of [alignment-handbook git](https://github.com/huggingface/alignment-handbook). Then have a look at my mamba.sh, that's the 
+2.
+3. Here's the tricky bit, you need to figure out the right docker image according to your python versTo get compatible docker image for Mamba, take nvcr.io/nvidia/pytorch:23.12-py3
+4. <git clone https://github.com/5thGenDev/mamba-finetune/tree/main> and <git clone https://github.com/5thGenDev/mamba-alignment-handbook>
+5. Before submitting .submit_file for condor to run  any bash script, type "chmod 777 bash script file" to make them executable
 If you want to intuitive read our code, read these files that you can see main page: dpo_sft.submit_file, mamba-sft-lora.yaml, mamba.sh, mamba.submit_file, sft.sh. Our yaml is filed based on - https://github.com/huggingface/alignment-handbook/pull/88 with some minor adjustment according to [Mamba model card](https://huggingface.co/state-spaces/mamba-2.8b-hf) and [Mamba paper section E2](https://arxiv.org/pdf/2312.00752.pdf)
    
 
