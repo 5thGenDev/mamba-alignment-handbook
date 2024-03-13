@@ -22,14 +22,14 @@ error  = /vol/research/diffusionModels_NAS/c$(cluster).p$(process).error
 # What to do with files.
 should_transfer_files = YES
 transfer_executable = true
-transfer_output_files = /vol/research/diffusionModels_NAS/c$(cluster).p$(process).checkpoint
+transfer_output_files = /mnt/fast/nobackup/users/nt00601/mamba-alignment-handbook/c$(cluster).p$(process).checkpoint
 
 # GPU, Storage and CUDA Requirements for the Job 
 requirements = (CUDAGlobalMemoryMb > 70000) && (CUDACapability > 7.6) && (HasWeka) && (HasDocker)
 
 # This job will complete in less than 1 hour. Up to 72 hours. 
 #This job can checkpoint
-+JobRunTime = 9
++JobRunTime = 64
 +CanCheckpoint = true
 
 # Request for guaranteed run time(measured in s to match epoch runtime). 0 mean job is happy to checkpoint and move at any time.
@@ -37,7 +37,7 @@ requirements = (CUDAGlobalMemoryMb > 70000) && (CUDACapability > 7.6) && (HasWek
 MaxJobRetirementTime = 0
 
 # Resource requirements
-request_GPUs 	= 2
+request_GPUs 	= 1
 +GPUMem 	= 80000 
 request_CPUs   = 10
 request_memory = 20000
