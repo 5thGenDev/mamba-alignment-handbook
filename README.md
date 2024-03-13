@@ -1,6 +1,5 @@
 Please see instruction for original alignment-handbook here: https://github.com/huggingface/alignment-handbook/tree/main
 
-
 ### Reproducible pipeline: 
 1. Git clone based alignment-handbook and based mamba and follow their installation instructions to get all necessary dependencies
 2. Delete git clone of based alignment-handbook and based mamba
@@ -48,6 +47,9 @@ But HPC condor frequently has server issues that are outside our controls where:
 - Multi-GPU jobs only gets extra priority when a machine (e.g. A100 compute node) has just come back up from draining, for the first few minutes they 'prefer' multi GPU jobs. This is by design because many machines were getting full of single GPU jobs and the multi jobs couldn't get slots so a 'defrag' system that picks a machine to drain every x hours so that multi gpu jobs can run. Likely happened to us too.
 - Some people have been potentially abusing the condor job scheduler to reserve compute resources for themselves by bypassing the limitations set on interactive jobs by submitting regular batch jobs with processes that idle but keep the job running so they can use the condor ssh to job feature to connect to their job and use it interactively. Maybe, but not likely.
 
+### To-do list futures:
+- Investigate on QLora, the author himself said that QLora-finetuining chuned out better result than even Full-finetuning: https://github.com/huggingface/alignment-handbook/pull/88. However, using QLora means that we need to investigate on sorting out unquantized base model: https://huggingface.co/docs/trl/main/en/dpo_trainer#downsides-to-merging-qlora-before-dpo-approach-2. Luckily, there are scripts for both, we just need to read 🤓
+- 
 
 #### What does a token look like
 A token can be a word or symbol like , ; . / @
