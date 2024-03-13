@@ -1,5 +1,5 @@
 # Model arguments
-model_name_or_path: state-spaces/mamba-2.8b-slimpj
+model_name_or_path: state-spaces/mamba-2.8b-hf
 model_revision: main
 torch_dtype: float32
 
