@@ -239,7 +239,26 @@ class SFTConfig(transformers.TrainingArguments):
         default=True,
         metadata={"help": ("Whether to log and evaluate the first global_step or not.")},
     )
-    optim: Optional[str] = field(default="adamw_torch")
+    optim: Optional[str] = field(
+        default="adamw_torch",
+        metadata={"help": ("AdamW optimizer as reported in Mamba paper")}
+    )
+    adam_beta1: Optional[int] = field(
+        default=0.9,
+        metadata={"help": ("beta1 for AdamW_torch as reported in Mamba paper")},
+    )
+    adam_beta2: Optional[int] = field(
+        default=0.95,
+        metadata={"help": ("beta2 for AdamW_torch as reported in Mamba paper")},
+    )
+    weight_decay: Optional[int] = field(
+        default=0.1,
+        metadata={"help": ("weight decay as reported in Mamba paper")},
+    )
+    max_grad_norm: Optional[int] = field(
+        default=1,
+        metadata={"help": ("gradient clip value as reported in Mamba paper")},
+    )
 
 
 @dataclass
@@ -268,6 +287,25 @@ class DPOConfig(transformers.TrainingArguments):
         default=None,
         metadata={"help": ("Used by TRL for reward model training, which tries to read this parameter in init.")},
     )
-    optim: Optional[str] = field(default="rmsprop")
+    optim: Optional[str] = field(
+        default="adamw_torch",
+        metadata={"help": ("AdamW optimizer as reported in Mamba paper")}
+    )
+    adam_beta1: Optional[int] = field(
+        default=0.9,
+        metadata={"help": ("beta1 for AdamW_torch as reported in Mamba paper")},
+    )
+    adam_beta2: Optional[int] = field(
+        default=0.95,
+        metadata={"help": ("beta2 for AdamW_torch as reported in Mamba paper")},
+    )
+    weight_decay: Optional[int] = field(
+        default=0.1,
+        metadata={"help": ("weight decay as reported in Mamba paper")},
+    )
+    max_grad_norm: Optional[int] = field(
+        default=1,
+        metadata={"help": ("gradient clip value as reported in Mamba paper")},
+    )
     remove_unused_columns: bool = field(default=False)
     loss_type: Optional[str] = field(default="sigmoid", metadata={"help": ("The loss type for DPO.")})
