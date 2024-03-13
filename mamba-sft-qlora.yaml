@@ -27,7 +27,7 @@ preprocessing_num_workers: 12
 # SFT trainer config
 # set per_device_train_batch_size such that the total batchsize for all used GPUs = 64 for SFT and 32 for DPO 
 bf16: false
-do_eval: true
+do_eval: false
 evaluation_strategy: epoch
 gradient_accumulation_steps: 2
 gradient_checkpointing: true
