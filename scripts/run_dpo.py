@@ -162,8 +162,8 @@ def main():
             revision=model_args.model_revision,
         )
         model_kwargs = None
-    if model_args.model_name_or_path == "state-spaces/mamba-2.8b-slimpj":
-        model = MambaLMHeadModel.from_pretrained("state-spaces/mamba-2.8b-slimpj")
+    if model_args.model_name_or_path == "https://huggingface.co/state-spaces/mamba-2.8b-hf":
+        model = MambaLMHeadModel.from_pretrained("https://huggingface.co/state-spaces/mamba-2.8b-hf")
     ref_model = model
     ref_model_kwargs = model_kwargs
 
