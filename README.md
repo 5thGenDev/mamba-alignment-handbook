@@ -56,7 +56,6 @@ But HPC condor frequently has server issues that are outside our controls where:
 
 ### To-do list futures:
 - Investigate on QLora, the author himself said that QLora-finetuining chuned out better result than even Full-finetuning: https://github.com/huggingface/alignment-handbook/pull/88. However, using QLora means that we need to investigate on sorting out unquantized base model: https://huggingface.co/docs/trl/main/en/dpo_trainer#downsides-to-merging-qlora-before-dpo-approach-2. Luckily, there are scripts for both, we just need to read 🤓
-- 
 
 #### What does a token look like
 A token can be a word or symbol like , ; . / @
