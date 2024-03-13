@@ -6,7 +6,7 @@
 
 # Job Universe. Standard, vanilla or docker.
 universe         = docker
-docker_image     = nvcr.io/nvidia/pytorch:24.01-py3
+docker_image     = nvcr.io/nvidia/pytorch:23.12-py3
 
 # Executable and its arguments 
 executable    = sft.sh
@@ -37,10 +37,10 @@ requirements = (CUDAGlobalMemoryMb > 70000) && (CUDACapability > 7.6) && (HasWek
 MaxJobRetirementTime = 0
 
 # Resource requirements
-request_GPUs 	= 4
+request_GPUs 	= 2
 +GPUMem 	= 80000 
 request_CPUs   = 10
-request_memory = 10000
+request_memory = 20000
 # Standard RAM on machine (directly decide OOM error or not).
 
 # Run job
