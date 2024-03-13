@@ -58,8 +58,8 @@ But HPC condor frequently has server issues that are outside our controls where:
 - Investigate on QLora, the author himself said that QLora-finetuining chuned out better result than even Full-finetuning: https://github.com/huggingface/alignment-handbook/pull/88. However, using QLora means that we need to investigate on sorting out unquantized base model: https://huggingface.co/docs/trl/main/en/dpo_trainer#downsides-to-merging-qlora-before-dpo-approach-2. Luckily, there are scripts for both, we just need to read 🤓
 
 #### What does a token look like
-A token can be a word or symbol like , ; . / @
-<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/5be21d1d-382d-486e-84c3-46a95c74865b" height="350" width="550"> <br>
+A token can be a word or symbol like , ; . / @ <br>
+<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/5be21d1d-382d-486e-84c3-46a95c74865b" height="250" width="450"> <br>
 Credit to [Ark video about Intuition behind Transformers which he went extra steps to explain about tokenization](https://youtu.be/g2BRIuln4uc?t=343) <br>
 
 ### Authors
