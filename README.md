@@ -59,7 +59,7 @@ But HPC condor frequently has server issues that are outside our controls where:
 
 #### What does a token look like
 A token can be a word or symbol like , ; . / @
-<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/5be21d1d-382d-486e-84c3-46a95c74865b" height="350" width="850"> <br>
+<img src="https://github.com/5thGenDev/mamba-alignment-handbook/assets/44685200/5be21d1d-382d-486e-84c3-46a95c74865b" height="350" width="550"> <br>
 Credit to [Ark video about Intuition behind Transformers which he went extra steps to explain about tokenization](https://youtu.be/g2BRIuln4uc?t=343) <br>
 
 ### Authors
