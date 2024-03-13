@@ -26,7 +26,7 @@ preprocessing_num_workers: 12
 # DPOTrainer arguments
 bf16: false
 beta: 0.01
-do_eval: true
+do_eval: false
 evaluation_strategy: steps
 eval_steps: 100
 gradient_accumulation_steps: 4
