@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Not recommend to source .bashrc in HPC condor
+# Don't source .bashrc in HPC condor cus compute node can't see it
 source /mnt/fast/nobackup/users/nt00601/miniconda3/etc/profile.d/conda.sh
 conda activate handbook
 
