@@ -1,11 +1,12 @@
 Please see instruction for original alignment-handbook here: https://github.com/huggingface/alignment-handbook/tree/main
 
 ## Reproducible pipeline: 
-1. For mamba, first type <nvcc --version> to check if you have that package, then type <pip install wheel>, then check hyperlinks for [mamba_ssm package](https://github.com/state-spaces/mamba/releases) and [causal_conv1d package](https://github.com/Dao-AILab/causal-conv1d/releases), [causal_conv1d package](https://github.com/Dao-AILab/causal-conv1d/releases) and install the wheel files package according to the cuda, Python, Pytorch versions you have in your conda environment (should be handbook env if you follow alignment-handbook instructions), then pip install the wheel files that you just manually downloaded. Finally, go to [NVIDIA NGC](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch/tags) pull a docker image according to Cuda, PyTorch and Python versions you have. Except for docker pull, all of these processes are supposed be done automatically in mamba/setup.py but that file isn't working well.
-2. [alignment-handbook git](https://github.com/huggingface/alignment-handbook).
-3. Here's the tricky bit, you need to figure out the right docker image according to your python versTo get compatible docker image for Mamba, take nvcr.io/nvidia/pytorch:23.12-py3
-4. <git clone https://github.com/5thGenDev/mamba-finetune/tree/main> and <git clone https://github.com/5thGenDev/mamba-alignment-handbook>
-5. Before submitting .submit_file for condor to run  any bash script, type "chmod 777 bash script file" to make them executable
+1. Presume you already installed miniconda3, type <conda create -n handbook python=3.10 && conda activate handbook>. This is from [alignment-handbook](https://github.com/huggingface/alignment-handbook/tree/main).
+2. Follow installation in [mamba-finetune](https://github.com/5thGenDev/mamba-finetune/blob/main/README.md) to install .whl files for mamba_ssm and causal_conv1d packages.
+3. <git clone https://github.com/5thGenDev/mamba-alignment-handbook.git>, then <cd ./mamba-alignment-handbook>, then <python -m pip install .>
+4. Type <pip install --force-reinstall 'transformers==4.38.2'> because later [huggingface-transformer version removes top_k_top_p_filtering function](https://github.com/huggingface/trl/issues/6). Also downgrade other packages with same-ish instructions where-ever you face incompatibility package issue.
+5. [alignment-handbook git](https://github.com/huggingface/alignment-handbook).
+6. Type "chmod 777 bash script file" to make .sh files in this github executable.
 If you want to intuitive read our code, read these files that you can see main page: dpo_sft.submit_file, mamba-sft-lora.yaml, mamba.sh, mamba.submit_file, sft.sh. Our yaml is filed based on - https://github.com/huggingface/alignment-handbook/pull/88 with some minor adjustment according to [Mamba model card](https://huggingface.co/state-spaces/mamba-2.8b-hf) and [Mamba paper section E2](https://arxiv.org/pdf/2312.00752.pdf)
    
 
