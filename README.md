@@ -2,7 +2,7 @@ Please see instruction for original alignment-handbook here: https://github.com/
 
 ## Reproducible pipeline: 
 1. Follow installation in [mamba-finetune](https://github.com/5thGenDev/mamba-finetune/blob/main/README.md) to install .whl files for mamba_ssm and causal_conv1d packages.
-2. Follow installtion instructions from [alignment-handbook](https://github.com/huggingface/alignment-handbook).
+2. Follow installation instructions from [alignment-handbook](https://github.com/huggingface/alignment-handbook).
 3. Type <pip install --force-reinstall 'transformers==4.38.2'> because later [huggingface-transformer version removes top_k_top_p_filtering function](https://github.com/huggingface/trl/issues/6).
 4. Type "chmod 777 bash script file" to make .sh files in this github executable.
 If you want to intuitive read our code, read these files that you can see main page: dpo_sft.submit_file, mamba-sft-lora.yaml, mamba.sh, mamba.submit_file, sft.sh. Our yaml is filed based on - https://github.com/huggingface/alignment-handbook/pull/88 with some minor adjustment according to [Mamba model card](https://huggingface.co/state-spaces/mamba-2.8b-hf) and [Mamba paper section E2](https://arxiv.org/pdf/2312.00752.pdf)
