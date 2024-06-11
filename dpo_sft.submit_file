@@ -1,6 +1,6 @@
 ####################
 #
-# Run this along with bash script to run Python env within docker image
+# Use condor .submit_file to run the bash script that runs SFT+DPO script. I can't show my own university .submit_file for obv reasons
 #
 ####################
 
@@ -11,37 +11,3 @@ docker_image     = nvcr.io/nvidia/pytorch:23.11-py3
 # Executable and its arguments 
 executable    = sft.sh
 arguments     = 
-
-# No need to mount if running on /mnt/
-
-# Input, Output and Log files
-log    = /vol/research/diffusionModels_NAS/c$(cluster).p$(process).log
-output = /vol/research/diffusionModels_NAS/c$(cluster).p$(process).out
-error  = /vol/research/diffusionModels_NAS/c$(cluster).p$(process).error
-
-# What to do with files.
-should_transfer_files = YES
-transfer_executable = true
-# transfer_output_files = /mnt/fast/nobackup/users/nt00601/mamba-alignment-handbook/c$(cluster).p$(process).checkpoint
-
-# GPU, Storage and CUDA Requirements for the Job 
-requirements = (CUDAGlobalMemoryMb > 70000) && (CUDACapability > 7.6) && (HasWeka) && (HasDocker)
-
-# This job will complete in less than 1 hour. Up to 72 hours. 
-#This job can checkpoint
-+JobRunTime = 64
-+CanCheckpoint = true
-
-# Request for guaranteed run time(measured in s to match epoch runtime). 0 mean job is happy to checkpoint and move at any time.
-# This lets Condor remove our job ASAP if a machine needs rebooting. Useful when we can checkpoint and restore
-MaxJobRetirementTime = 0
-
-# Resource requirements
-request_GPUs 	= 1
-+GPUMem 	= 80000 
-request_CPUs   = 10
-request_memory = 20000
-# Standard RAM on machine (directly decide OOM error or not).
-
-# Run job
-queue 1
